@@ -1,0 +1,701 @@
+<html><head><base href="https://github.com/Kabasele754/Profile-achille">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Interactif et Téléchargeable - KABASELE KANKONDE ACHILLE</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+
+  :root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --background-color: #ecf0f1;
+    --text-color: #34495e;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .cv-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-radius: 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+  }
+  .sidebar {
+    background-color: var(--primary-color);
+    color: #fff;
+   
+  }
+
+  .sidebar, .main-content {
+    padding: 1.5rem; 
+  }
+
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem; 
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    color: var(--secondary-color);
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+    margin-top: 1.5rem; 
+    margin-bottom: 1rem; 
+  }
+
+  h3 {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    margin-bottom: 0.1rem;
+  }
+
+  .section {
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-bar, .language-bar {
+    background-color: #ddd;
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-progress, .language-progress {
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    transition: width 1s ease-in-out;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: var(--secondary-color);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .project-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .download-btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  .download-btn:hover {
+    background-color: #c0392b;
+  }
+
+  .lang-btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin: 0 0.5rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  .lang-btn:hover {
+    background-color: #2980b9;
+  }
+
+  @media (max-width: 768px) {
+    .cv-container {
+      grid-template-columns: 1fr;
+      padding: 10px;
+    }
+  }
+
+  @media print {
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .cv-container {
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+
+  .main-content p {
+    text-align: justify;
+  }
+
+  .sidebar p {
+    text-align: left;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+<div class="cv-container" id="cv-content">
+  <aside class="sidebar">
+    <img src="img/profile_achille.jpeg" alt="Portrait professionnel d'un homme en costume bleu" class="profile-img">
+    <h2>Contact</h2>
+    <p><i class="fas fa-envelope"></i> pepexykabasele@gmail.com</p>
+    <p><i class="fas fa-phone"></i> +243 977 977 427 </p>
+    <p><i class="fas fa-phone"></i> +243 899 777 615</p>
+    <p><i class="fas fa-map-marker-alt"></i> Kinshasa, RD Congo</p>
+    <p><i class="fab fa-linkedin"></i> linkedin.com/in/achille-kabasele-ach/</p>
+    <p><i class="fab fa-github"></i> <a href="https://github.com/Kabasele754"></a>github.com/Kabasele754 </p>
+    
+    <h2>Compétences</h2>
+    <div class="skill">
+      <p>Développement Web</p>
+      <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+    </div>
+     <div class="skill">
+      <p>Développement Mobile IOS et Android</p>
+      <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+    </div>
+    <div class="skill">
+      <p>Intelligence Artificielle</p>
+      <div class="skill-bar"><div class="skill-progress" style="width: 60%;"></div></div>
+    </div>
+    <div class="skill">
+      <p>Gestion de Projets</p>
+      <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+    </div>
+    
+    <h2>Langues</h2>
+    <div class="language">
+      <p>Français</p>
+      <div class="language-bar"><div class="language-progress" style="width: 100%;"></div></div>
+    </div>
+    <div class="language">
+      <p>Anglais</p>
+      <div class="language-bar"><div class="language-progress" style="width: 85%;"></div></div>
+    </div>
+    <div class="language">
+      <p>Swahili</p>
+      <div class="language-bar"><div class="language-progress" style="width: 75%;"></div></div>
+    </div>
+  </aside>
+  
+  <main class="main-content">
+    <header>
+        <h1>KABASELE KANKONDE ACHILLE</h1>
+        <p>Innovateur Technologique & Aspirant Assistant d'Enseignement en Informatique</p>
+    </header>
+    
+    <section class="section">
+        <h2>Profil Professionnel</h2>
+        <p>Passionné par l'intersection de la technologie, de l'éducation et du développement durable, je m'efforce de repousser les limites de l'innovation pour résoudre des problèmes complexes en Afrique. Mon approche allie expertise technique et vision stratégique pour former la prochaine génération de leaders technologiques tout en contribuant au progrès socio-économique.</p>
+    </section>
+    
+    <section class="section">
+        <h2>Expérience Professionnelle</h2>
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <h3>Assistant Universitaire et Chef de Projet</h3>
+                <p>Philip Lemon University & Université Panafricaine de Lubumbashi | 2020 - Présent</p>
+                <ul>
+                    <li>Enseignement des cours en IA, machine learning, systèmes embarqués, modélisation UML/SysML, et méthodologies multi-agents (MASE), formant des étudiants aux technologies émergentes et à l'ingénierie logicielle.</li>
+                    <li>Chef de projet pour un système de surveillance d'examens par drones, utilisant l'IA et la vision par ordinateur pour surveiller les auditoires et détecter les comportements suspects en temps réel.</li>
+                    <li>Développement d'une solution de gestion de présence des étudiants par reconnaissance faciale, automatisant le suivi des présences.</li>
+                    <li>Encadrement de projets web et mobiles, guidant les étudiants dans la création d'applications pratiques comme des systèmes de gestion académique et de surveillance en temps réel.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Développeur de la Plateforme TrustMyTask</h3>
+                <p>Projet Personnel | 2022 - Présent</p>
+                <ul>
+                    <li>Création d'une plateforme de gestion de projets basée sur Scrum, avec 200+ utilisateurs gérant efficacement leurs tâches.</li>
+                    <li>Optimisation des processus de développement logiciel au sein d'une équipe collaborative.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Gestionnaire de Projet, Ceridac Éditions</h3>
+                <p>Ceridac Éditions, Kinshasa | 2023 - Présent</p>
+                <ul>
+                    <li>Gestion de la plateforme de publication pour auteurs, avec plus de 50 contributeurs (professeurs et assistants).</li>
+                    <li>Publication et gestion de 300+ articles et livres, renforçant la visibilité des chercheurs congolais.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Développeur de la Plateforme TrustMySecurity</h3>
+                <p>Projet Personnel | 2022 - Présent</p>
+                <ul>
+                    <li>Développement d'une plateforme de suivi en temps réel pour la gestion des officiers de sécurité, vérifiant leur position et activité.</li>
+                    <li>Gestion des rapports de présence et des activités sur site, garantissant la transparence et la réactivité.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Développeur de la Plateforme DRCProject</h3>
+                <p>Projet Personnel | 2023 - Présent</p>
+                <ul>
+                    <li>Création d'une plateforme de gestion et de republication d'articles congolais en français et en anglais, facilitant l'accès à la recherche congolaise à l'international.</li>
+                    <li>Utilisée principalement par la diaspora congolaise aux États-Unis.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Développeur de la Plateforme Unipal-Univ</h3>
+                <p>Université Panafricaine de Lubumbashi | 2021 - Présent</p>
+                <ul>
+                    <li>Développement d'une plateforme académique pour la gestion des inscriptions, des paiements et des processus internes.</li>
+                    <li>Amélioration de l'efficacité administrative, facilitant l'inscription de 500+ étudiants par an.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Développeur de la Plateforme PLU</h3>
+                <p>Philip Lemon University | 2020 - 2023</p>
+                <ul>
+                    <li>Développement et gestion d'une plateforme académique pour la gestion des inscriptions et des paiements académiques.</li>
+                    <li>Automatisation des processus, améliorant la transparence financière pour 700+ étudiants.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Formation Académique</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Master en Informatique, spécialisation Génie logiciel (en cours)</h3>
+                <p>Esisalama | 2022 - Présent</p>
+                <p>Recherche : "Algorithmes de Deep Learning pour la Détection Précoce des Maladies Tropicales"</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Licence en Génie des Systèmes d'Information</h3>
+                <p>Université Protestante de Lubumbashi | 2017 - 2019</p>
+                <p>Mémoire : "Analyse et conception d'un système de gestion de la circulation par la méthode ASCIMI"</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Projets Innovants</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>AgroSmart Congo</h3>
+                <p>Application mobile utilisant l'IA et l'IoT pour optimiser l'irrigation et la gestion des cultures dans les zones arides.</p>
+            </div>
+            <div class="project-card">
+                <h3>CIFTL</h3>
+                <p>Plateforme d'apprentissage en ligne adaptative offrant des cours personnalisés en fonction des styles d'apprentissage et de la connectivité.</p>
+            </div>
+            <div class="project-card">
+                <h3>TrustMySecurity</h3>
+                <p>Système de suivi des officiers en temps réel utilisant Geofencing, Geotargeting et Geomonitoring.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Engagements & Réalisations</h2>
+        <ul>
+            <li>Fondateur de "5BSS et Etech-plus", initiative formant 200+ jeunes aux technologies émergentes.</li>
+            <li>Conférencier à l'Unipal et PLU : "L'Innovation Frugale basée sur l'Intelligence Artificielle : Catalyseur du Développement Africain" (2024)</li>
+            <li>Certifications : "Python pour la Data Science (2020)", "Scrum: The Basics (2023)"</li>
+        </ul>
+    </section>
+</main>
+
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <button id="langFr" class="lang-btn">Français</button>
+  <button id="langEn" class="lang-btn">English</button>
+  <a href="#" class="download-btn" id="downloadPDF">Télécharger le CV en PDF</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const translations = {
+    fr: {
+      title: "CV Interactif et Téléchargeable - KABASELE KANKONDE ACHILLE",
+      downloadBtn: "Télécharger le CV en PDF",
+      profileTitle: "Innovateur Technologique & Aspirant Assistant d'Enseignement en Informatique",
+      contact: "Contact",
+      skills: "Compétences",
+      languages: "Langues",
+      professionalProfile: "Profil Professionnel",
+      professionalProfileContent: "Passionné par l'intersection de la technologie, de l'éducation et du développement durable, je cherche à repousser les limites de l'innovation pour résoudre des problèmes complexes en Afrique. Mon approche combine une expertise technique approfondie avec une vision stratégique, visant à former la prochaine génération de leaders technologiques tout en contribuant au progrès socio-économique.",
+      workExperience: "Expérience Professionnelle",
+      education: "Formation Académique",
+      innovativeProjects: "Projets Innovants",
+      engagements: "Engagements & Réalisations",
+      webDevelopment: "Développement Web",
+      webDevProgress: "90%",
+      ai: "Intelligence Artificielle",
+      aiProgress: "85%",
+      projectManagement: "Gestion de Projets",
+      projectManagementProgress: "80%",
+      french: "Français",
+      frenchProgress: "100%",
+      english: "Anglais",
+      englishProgress: "85%",
+      swahili: "Swahili",
+      swahiliProgress: "75%",
+        workExperience: "Expérience Professionnelle",
+        position1: "Assistant Universitaire et Chef de Projet",
+        institution1: "Philip Lemon University & Université Panafricaine de Lubumbashi | 2020 - Présent",
+        task1_1: "Enseignement des cours en IA, machine learning, systèmes embarqués, modélisation UML/SysML, et méthodologies multi-agents (MASE), formant des étudiants aux technologies émergentes et à l'ingénierie logicielle.",
+        task1_2: "Chef de projet pour un système de surveillance d'examens par drones, utilisant l'IA et la vision par ordinateur pour surveiller les auditoires et détecter les comportements suspects en temps réel.",
+        task1_3: "Développement d'une solution de gestion de présence des étudiants par reconnaissance faciale, automatisant le suivi des présences.",
+        task1_4: "Encadrement de projets web et mobiles, guidant les étudiants dans la création d'applications pratiques comme des systèmes de gestion académique et de surveillance en temps réel.",
+        academicEducation: "Formation Académique",
+        masterDegree: "Master en Informatique, spécialisation Génie logiciel (en cours)",
+        institutionMaster: "Esisalama | 2022 - Présent",
+        research: "Recherche : \"Algorithmes de Deep Learning pour la Détection Précoce des Maladies Tropicales\"",
+        bachelorDegree: "Licence en Génie des Systèmes d'Information",
+        institutionBachelor: "Université Protestante de Lubumbashi | 2017 - 2019",
+        thesis: "Mémoire : \"Analyse et conception d'un système de gestion de la circulation par la méthode ASCIMI\"",
+        innovativeProjects: "Projets Innovants",
+        project1: "AgroSmart Congo",
+        project1Description: "Application mobile utilisant l'IA et l'IoT pour optimiser l'irrigation et la gestion des cultures dans les zones arides.",
+        commitments: "Engagements & Réalisations",
+        commitment1: "Fondateur de \"5BSS et Etech-plus\", initiative formant 200+ jeunes aux technologies émergentes.",
+        commitment2: "Conférencier à l'Unipal et PLU : \"L'Innovation Frugale basée sur l'Intelligence Artificielle : Catalyseur du Développement Africain\" (2024)",
+        certification1: "Certifications : \"Python pour la Data Science (2020)\", \"Scrum: The Basics (2023)\"",
+            },
+    en: {
+      title: "Interactive and Downloadable CV - KABASELE KANKONDE ACHILLE",
+      downloadBtn: "Download CV as PDF",
+      profileTitle: "Technology Innovator & Aspiring Computer Science Teaching Assistant",
+      contact: "Contact",
+      skills: "Skills",
+      languages: "Languages",
+      professionalProfile: "Professional Profile",
+      professionalProfileContent: "Passionate about the intersection of technology, education, and sustainable development, I seek to push the boundaries of innovation to solve complex problems in Africa. My approach combines deep technical expertise with a strategic vision, aiming to train the next generation of technology leaders while contributing to socio-economic progress.",
+      workExperience: "Work Experience",
+      education: "Education",
+      innovativeProjects: "Innovative Projects",
+      engagements: "Engagements & Achievements",
+      webDevelopment: "Web Development",
+      webDevProgress: "90%",
+      ai: "Artificial Intelligence",
+      aiProgress: "85%",
+      projectManagement: "Project Management",
+      projectManagementProgress: "80%",
+      french: "French",
+      frenchProgress: "100%",
+      english: "English",
+      englishProgress: "85%",
+      swahili: "Swahili",
+      swahiliProgress: "75%",
+      workExperience: "Work Experience",
+      position1: "University Assistant and Project Leader",
+      institution1: "Philip Lemon University & Pan-African University of Lubumbashi | 2020 - Present",
+      task1_1: "Teaching courses in AI, machine learning, embedded systems, UML/SysML modeling, and multi-agent methodologies (MASE), training students in emerging technologies and software engineering.",
+      task1_2: "Project leader for an exam monitoring drone system, using AI and computer vision to monitor classrooms and detect suspicious behavior in real-time.",
+      task1_3: "Developed a facial recognition-based student attendance management solution, automating attendance tracking.",
+      task1_4: "Supervised web and mobile projects, guiding students in creating practical applications such as academic management systems and real-time monitoring.",
+      academicEducation: "Academic Education",
+      masterDegree: "Master in Computer Science, Software Engineering Specialization (ongoing)",
+      institutionMaster: "Esisalama | 2022 - Present",
+      research: "Research: \"Deep Learning Algorithms for Early Detection of Tropical Diseases\"",
+      bachelorDegree: "Bachelor in Information Systems Engineering",
+      institutionBachelor: "Protestant University of Lubumbashi | 2017 - 2019",
+      thesis: "Thesis: \"Analysis and Design of a Traffic Management System Using the ASCIMI Methodology\"",
+      innovativeProjects: "Innovative Projects",
+      project1: "AgroSmart Congo",
+      project1Description: "Mobile application using AI and IoT to optimize irrigation and crop management in arid areas.",
+      commitments: "Commitments & Achievements",
+      commitment1: "Founder of \"5BSS et Etech-plus\", initiative training 200+ youth in emerging technologies.",
+      commitment2: "Speaker at Unipal and PLU: \"Frugal Innovation based on Artificial Intelligence: Catalyst for African Development\" (2024)",
+      certification1: "Certifications: \"Python for Data Science (2020)\", \"Scrum: The Basics (2023)\"",
+             }
+  };
+
+  const switchLanguage = (lang) => {
+    try {
+      document.title = translations[lang].title || document.title;
+      const downloadBtn = document.getElementById('downloadPDF');
+      if (downloadBtn) downloadBtn.textContent = translations[lang].downloadBtn;
+      
+      // Update main content
+      const profileTitle = document.querySelector('.main-content header p');
+      if (profileTitle) profileTitle.textContent = translations[lang].profileTitle;
+      
+      const headings = document.querySelectorAll('.main-content h2');
+      if (headings.length >= 5) {
+        headings[0].textContent = translations[lang].professionalProfile;
+        headings[1].textContent = translations[lang].workExperience;
+        headings[2].textContent = translations[lang].education;
+        headings[3].textContent = translations[lang].innovativeProjects;
+        headings[4].textContent = translations[lang].engagements;
+      }
+      
+      const profileContent = document.querySelector('.main-content .section:nth-of-type(1) p');
+      if (profileContent) profileContent.textContent = translations[lang].professionalProfileContent;
+      
+      // Update work experience
+      const workExperience = document.querySelectorAll('.timeline-item');
+      if (workExperience.length >= 2) {
+        const techLeader = workExperience[0];
+        const fullStackDev = workExperience[1];
+        
+        if (techLeader) {
+          techLeader.querySelector('h3').textContent = translations[lang].techLeader;
+          techLeader.querySelector('p').textContent = translations[lang].afriTechSolutions;
+          const techLeaderList = techLeader.querySelectorAll('li');
+          if (techLeaderList.length >= 3) {
+            techLeaderList[0].textContent = translations[lang].techLeaderDesc1;
+            techLeaderList[1].textContent = translations[lang].techLeaderDesc2;
+            techLeaderList[2].textContent = translations[lang].techLeaderDesc3;
+          }
+        }
+        
+        if (fullStackDev) {
+          fullStackDev.querySelector('h3').textContent = translations[lang].fullStackDev;
+          fullStackDev.querySelector('p').textContent = translations[lang].dataDriveCongo;
+          const fullStackDevList = fullStackDev.querySelectorAll('li');
+          if (fullStackDevList.length >= 2) {
+            fullStackDevList[0].textContent = translations[lang].fullStackDevDesc1;
+            fullStackDevList[1].textContent = translations[lang].fullStackDevDesc2;
+          }
+        }
+      }
+      
+      // Update education
+      const education = document.querySelectorAll('.timeline-item');
+      if (education.length >= 4) {
+        const phd = education[2];
+        const master = education[3];
+        
+        if (phd) {
+          phd.querySelector('h3').textContent = translations[lang].phdAI;
+          phd.querySelectorAll('p')[0].textContent = translations[lang].phdUniversity;
+          phd.querySelectorAll('p')[1].textContent = translations[lang].phdThesis;
+        }
+        
+        if (master) {
+          master.querySelector('h3').textContent = translations[lang].masterCS;
+          master.querySelectorAll('p')[0].textContent = translations[lang].masterUniversity;
+          master.querySelectorAll('p')[1].textContent = translations[lang].masterThesis;
+        }
+      }
+      
+      // Update projects
+      const projects = document.querySelectorAll('.project-card');
+      if (projects.length >= 3) {
+        projects[0].querySelector('h3').textContent = translations[lang].agroSmartCongo;
+        projects[0].querySelector('p').textContent = translations[lang].agroSmartCongoDesc;
+        projects[1].querySelector('h3').textContent = translations[lang].eduTechForAll;
+        projects[1].querySelector('p').textContent = translations[lang].eduTechForAllDesc;
+        projects[2].querySelector('h3').textContent = translations[lang].healthTrackRDC;
+        projects[2].querySelector('p').textContent = translations[lang].healthTrackRDCDesc;
+      }
+      
+      // Update achievements
+      const achievements = document.querySelector('.section:last-child ul');
+      if (achievements) {
+        const achievementItems = achievements.querySelectorAll('li');
+        if (achievementItems.length >= 4) {
+          achievementItems[0].textContent = translations[lang].achievement1;
+          achievementItems[1].textContent = translations[lang].achievement2;
+          achievementItems[2].textContent = translations[lang].achievement3;
+          achievementItems[3].textContent = translations[lang].achievement4;
+        }
+      }
+      
+      // Update sidebar
+      const sidebarHeadings = document.querySelectorAll('.sidebar h2');
+      if (sidebarHeadings.length >= 3) {
+        sidebarHeadings[0].textContent = translations[lang].contact;
+        sidebarHeadings[1].textContent = translations[lang].skills;
+        sidebarHeadings[2].textContent = translations[lang].languages;
+      }
+
+      // Update skill and language sections
+      const skills = [
+        { name: translations[lang].webDevelopment, progress: translations[lang].webDevProgress },
+        { name: translations[lang].ai, progress: translations[lang].aiProgress },
+        { name: translations[lang].projectManagement, progress: translations[lang].projectManagementProgress }
+      ];
+      
+      const languages = [
+        { name: translations[lang].french, progress: translations[lang].frenchProgress },
+        { name: translations[lang].english, progress: translations[lang].englishProgress },
+        { name: translations[lang].swahili, progress: translations[lang].swahiliProgress }
+      ];
+
+      const skillElements = document.querySelectorAll('.skill');
+      skillElements.forEach((skill, index) => {
+        if (index < skills.length) {
+          const skillName = skill.querySelector('p');
+          const skillProgress = skill.querySelector('.skill-progress');
+          if (skillName) skillName.textContent = skills[index].name;
+          if (skillProgress) skillProgress.style.width = skills[index].progress;
+        }
+      });
+
+      const languageElements = document.querySelectorAll('.language');
+      languageElements.forEach((language, index) => {
+        if (index < languages.length) {
+          const langName = language.querySelector('p');
+          const langProgress = language.querySelector('.language-progress');
+          if (langName) langName.textContent = languages[index].name;
+          if (langProgress) langProgress.style.width = languages[index].progress;
+        }
+      });
+    } catch (error) {
+      console.error(`Error in switchLanguage: ${error.message}`);
+    }
+  };
+
+  document.getElementById('langFr').addEventListener('click', () => {
+    try {
+      switchLanguage('fr');
+    } catch (error) {
+      console.error(`Error switching to French: ${error.message}`);
+    }
+  });
+
+  document.getElementById('langEn').addEventListener('click', () => {
+    try {
+      switchLanguage('en');
+    } catch (error) {
+      console.error(`Error switching to English: ${error.message}`);
+    }
+  });
+
+  const animateProgressBars = () => {
+    const bars = document.querySelectorAll('.skill-progress, .language-progress');
+    bars.forEach(bar => {
+      const width = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => { bar.style.width = width; }, 300);
+    });
+  };
+
+  const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateProgressBars();
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, { threshold: 0.5 });
+  const sidebar = document.querySelector('.sidebar');
+  observer.observe(sidebar);
+
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.backgroundColor = '#e8e8e8';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.backgroundColor = '#f8f9fa';
+    });
+  });
+
+  document.getElementById('downloadPDF').addEventListener('click', function(e) {
+    e.preventDefault();
+    const element = document.getElementById('cv-content');
+    const lang = document.title.includes("Interactive") ? "en" : "fr";
+    const opt = {
+      margin: [5, 5, 5, 5],
+      filename: `CV_KABASELE_KANKONDE_ACHILLE_${lang}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { 
+        scale: 2, 
+        useCORS: true,
+        scrollY: 0,
+        windowWidth: document.documentElement.offsetWidth
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  });
+});
+</script>
+
+</body>
+</html>
