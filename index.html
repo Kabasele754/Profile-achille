@@ -1,0 +1,839 @@
+<html><head><base href="https://github.com/Kabasele754">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV - KABASELE KANKONDE ACHILLE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+  
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --background-color: #ecf0f1;
+      --text-color: #34495e;
+    }
+  
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  
+    .cv-container {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 1200px;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 0;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+    }
+    
+  
+    .sidebar {
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+  
+    .sidebar p {
+      margin-bottom: 0.5rem;
+    }
+  
+    .sidebar a {
+      color: inherit;
+      text-decoration: none;
+    }
+  
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+  
+    .main-content {
+      padding: 1.5rem; 
+    }
+  
+    .profile-img-container {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 3px solid #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  
+    .btn-popup {
+      display: none;
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+  
+    .crop-btn, .upload-btn {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0 5px;
+    }
+  
+    .crop-btn:hover, .upload-btn:hover {
+      background-color: #2980b9;
+    }
+  
+    .download-btn {
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: inline-block;
+      border: 2px solid #2c3e50;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .download-btn:hover {
+      background-color: #fff;
+      color: #2c3e50;
+    }
+  
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      overflow-y: auto;
+    }
+  
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  
+    #image-to-crop {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+  
+    #save-crop, #cancel-crop {
+      padding: 10px 20px;
+    }
+  
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+    }
+  
+    h1 {
+      font-size: 1.6rem;
+      color: var(--secondary-color);
+    }
+  
+    h2 {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 0.5rem;
+      margin-top: 1.5rem; 
+      margin-bottom: 1rem; 
+    }
+  
+    h3 {
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      margin-bottom: 0.1rem;
+    }
+  
+    .section {
+      margin-bottom: 1.5rem;
+    }
+  
+    .skill-bar, .language-bar {
+      background-color: #ddd;
+      height: 8px;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+  
+    .skill-progress, .language-progress {
+      height: 100%;
+      border-radius: 4px;
+      background-color: var(--secondary-color);
+      transition: width 1s ease-in-out;
+    }
+  
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+  
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-left: 2px solid var(--secondary-color);
+      padding-left: 20px;
+    }
+  
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+    }
+  
+    .timeline-item h3 {
+      margin-bottom: 0.5rem;
+    }
+  
+    .timeline-item p {
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+  
+    .timeline-item ul {
+      padding-left: 20px;
+    }
+  
+    .timeline-item li {
+      margin-bottom: 0.5rem;
+    }
+  
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+  
+    .project-card {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+  
+    .lang-btn {
+      background-color: var(--secondary-color);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin: 0 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+  
+    .lang-btn:hover {
+      background-color: #2980b9;
+    }
+  
+    .timeline-item h3 a, .project-card h3 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+  
+    .timeline-item h3 a:hover, .project-card h3 a:hover {
+      color: var(--secondary-color);
+    }
+  
+    @media (max-width: 768px) {
+      .cv-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+    }
+  
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .cv-container {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+    }
+  
+    .main-content p {
+      text-align: justify;
+    }
+  
+    .sidebar p {
+      text-align: left;
+    }
+  
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+  </head>
+  <body>
+  
+  <div class="cv-container" id="cv-content">
+    <aside class="sidebar">
+      <div class="profile-img-container">
+        <img src="https://raw.githubusercontent.com/Kabasele754/Profile-achille/master/img/profile_achille.jpeg" alt="Portrait professionnel d'un homme en costume bleu" class="profile-img" id="profile-img">
+        <div class="btn-popup" id="btn-popup">
+          <button id="crop-btn" class="crop-btn">Crop</button>
+          <button id="upload-btn" class="upload-btn">Download</button>
+        </div>
+        <input type="file" id="upload-img" accept="image/*" style="display: none;">
+      </div>
+      <h2 data-translate="contact">Contact</h2>
+      <p><i class="fas fa-envelope"></i> pepexykabasele@gmail.com</p>
+      <p><i class="fas fa-phone"></i> +243 977 977 427</p>
+      <p><i class="fas fa-phone"></i> +243 899 777 615</p>
+      <p><i class="fas fa-map-marker-alt"></i> Kinshasa, RD Congo</p>
+      <p><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/achille-kabasele-ach/">linkedin.com/in/achille-kabasele-ach/</a></p>
+      <p><i class="fab fa-github"></i> <a href="https://github.com/Kabasele754">github.com/Kabasele754</a></p>
+      <p><i class="fab fa-facebook"></i> <a href="https://web.facebook.com/achille.kabasele.1/">web.facebook.com/achille.kabasele.1</a></p>
+      <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/pepexy_kabasele/">instagram.com/pepexy_kabasele</a></p>
+      <p><i class="fab fa-youtube"></i> <a href="https://www.youtube.com/@achillekabasele8455">@achillekabasele8455</a></p>
+      
+      <h2 data-translate="skills">Compétences</h2>
+      <div class="skill">
+        <p data-translate="webDevelopment">Développement Web</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+      </div>
+      <div class="skill">
+        <p data-translate="mobileDevelopment">Développement Mobile IOS et Android</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+      </div>
+      <div class="skill">
+        <p data-translate="ai">Intelligence Artificielle</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 50%;"></div></div>
+      </div>
+      <div class="skill">
+        <p data-translate="projectManagement">Gestion de Projets</p>
+        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+      </div>
+      
+      <h2 data-translate="languages">Langues</h2>
+      <div class="language">
+        <p data-translate="french">Français</p>
+        <div class="language-bar"><div class="language-progress" style="width: 100%;"></div></div>
+      </div>
+      <div class="language">
+        <p data-translate="english">Anglais</p>
+        <div class="language-bar"><div class="language-progress" style="width: 50%;"></div></div>
+      </div>
+      <div class="language">
+        <p data-translate="swahili">Swahili</p>
+        <div class="language-bar"><div class="language-progress" style="width: 75%;"></div></div>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <header>
+        <h1>KABASELE KANKONDE ACHILLE</h1>
+        <p data-translate="profileTitle">Innovateur Technologique & Aspirant Assistant d'Enseignement en Informatique</p>
+      </header>
+  
+      <section class="section">
+        <h2 data-translate="professionalProfile">Profil Professionnel</h2>
+        <p data-translate="professionalProfileContent">Passionné par l'intersection de la technologie, de l'éducation et du développement durable, je cherche à repousser les limites de l'innovation pour résoudre des problèmes complexes en Afrique. Mon approche combine une expertise technique approfondie avec une vision stratégique, visant à former la prochaine génération de leaders technologiques tout en contribuant au progrès socio-économique.</p>
+      </section>
+      
+      <section class="section">
+        <h2 data-translate="workExperience">Expérience Professionnelle</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3 data-translate="universityAssistant">
+              <a href="https://www.unipal-univ.com" target="_blank">Assistant Universitaire et Chef de Projet</a>
+            </h3>
+            <p data-translate="universityAssistantPlace">Philip Lemon University & Université Panafricaine de Lubumbashi | 2020 - Présent</p>
+            <ul>
+              <li data-translate="universityAssistantDesc1">Enseignement des cours en IA, machine learning, systèmes embarqués, modélisation UML/SysML, et méthodologies multi-agents (MASE), formant des étudiants aux technologies émergentes et à l'ingénierie logicielle.</li>
+              <li data-translate="universityAssistantDesc2">Chef de projet pour un système de surveillance d'examens par drones, utilisant l'IA et la vision par ordinateur pour surveiller les auditoires et détecter les comportements suspects en temps réel.</li>
+              <li data-translate="universityAssistantDesc3">Développement d'une solution de gestion de présence des étudiants par reconnaissance faciale, automatisant le suivi des présences.</li>
+              <li data-translate="universityAssistantDesc4">Encadrement de projets web et mobiles, guidant les étudiants dans la création d'applications pratiques comme des systèmes de gestion académique et de surveillance en temps réel.</li>
+            </ul>
+          </div>
+  
+          <div class="timeline-item">
+            <h3 data-translate="trustMyTaskDev">
+              <a href="https://www.trustmytask.com" target="_blank">Développeur de la Plateforme TrustMyTask</a>
+            </h3>
+            <p data-translate="trustMyTaskPlace">Projet Personnel | 2022 - Présent</p>
+            <ul>
+              <li data-translate="trustMyTaskDesc1">Création d'une plateforme de gestion de projets basée sur Scrum, avec 200+ utilisateurs gérant efficacement leurs tâches.</li>
+              <li data-translate="trustMyTaskDesc2">Optimisation des processus de développement logiciel au sein d'une équipe collaborative.</li>
+            </ul>
+          </div>
+  
+          <div class="timeline-item">
+            <h3 data-translate="projectManagerCeridac">
+              <a href="https://ceridac.org/" target="_blank">Gestionnaire de Projet, Ceridac Éditions</a>
+            </h3>
+            <p data-translate="ceridacPlace">Ceridac Éditions, Kinshasa | 2023 - Présent</p>
+            <ul>
+              <li data-translate="ceridacDesc1">Gestion de la plateforme de publication pour auteurs, avec plus de 50 contributeurs (professeurs et assistants).</li>
+              <li data-translate="ceridacDesc2">Publication et gestion de 300+ articles et livres, renforçant la visibilité des chercheurs congolais.</li>
+            </ul>
+          </div>
+  
+          <div class="timeline-item">
+            <h3 data-translate="trustMySecurityDev">
+              <a href="https://www.trustmysecurity.com" target="_blank">Développeur de la Plateforme TrustMySecurity</a>
+            </h3>
+            <p data-translate="trustMySecurityPlace">Projet Personnel | 2022 - Présent</p>
+            <ul>
+              <li data-translate="trustMySecurityDesc1">Développement d'une plateforme de suivi en temps réel pour la gestion des officiers de sécurité, vérifiant leur position et activité.</li>
+              <li data-translate="trustMySecurityDesc2">Gestion des rapports de présence et des activités sur site, garantissant la transparence et la réactivité.</li>
+            </ul>
+          </div>
+  
+          <div class="timeline-item">
+            <h3 data-translate="drcProjectDev">
+              <a href="https://www.drcongoproject.com/" target="_blank">Développeur de la Plateforme DRCProject</a>
+            </h3>
+            <p data-translate="drcProjectPlace">Projet Personnel | 2023 - Présent</p>
+            <ul>
+              <li data-translate="drcProjectDesc1">Création d'une plateforme de gestion et de republication d'articles congolais en français et en anglais, facilitant l'accès à la recherche congolaise à l'international.</li>
+              <li data-translate="drcProjectDesc2">Utilisée principalement par la diaspora congolaise aux États-Unis.</li>
+            </ul>
+          </div>
+  
+          <div class="timeline-item">
+            <h3 data-translate="unipalDev">
+              <a href="https://www.unipal-univ.com" target="_blank">Développeur de la Plateforme Unipal-Univ</a>
+            </h3>
+            <p data-translate="unipalPlace">Université Panafricaine de Lubumbashi | 2021 - Présent</p>
+            <ul>
+              <li data-translate="unipalDesc1">Développement d'une plateforme académique pour la gestion des inscriptions, des paiements et des processus internes.</li>
+              <li data-translate="unipalDesc2">Amélioration de l'efficacité administrative, facilitant l'inscription de 500+ étudiants par an.</li>
+            </ul>
+          </div>
+  
+          <div class="timeline-item">
+            <h3 data-translate="pluDev">
+              <a href="https://www.plu.com" target="_blank">Développeur de la Plateforme PLU</a>
+            </h3>
+            <p data-translate="pluPlace">Philip Lemon University | 2020 - 2023</p>
+            <ul>
+              <li data-translate="pluDesc1">Développement et gestion d'une plateforme académique pour la gestion des inscriptions et des paiements académiques.</li>
+              <li data-translate="pluDesc2">Automatisation des processus, améliorant la transparence financière pour 700+ étudiants.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section class="section">
+        <h2 data-translate="education">Formation Académique</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3 data-translate="masterInInformatique">Master en Informatique, spécialisation Génie logiciel (en cours)</h3>
+            <p data-translate="esisalamaPlace">Esisalama | 2022 - Présent</p>
+            <p data-translate="researchTopic">Recherche : "Algorithmes de Deep Learning pour la Détection Précoce des Maladies Tropicales"</p>
+          </div>
+          <div class="timeline-item">
+            <h3 data-translate="bachelorInGIS">Licence en Génie des Systèmes d'Information</h3>
+            <p data-translate="upiPlace">Université Protestante de Lubumbashi | 2017 - 2019</p>
+            <p data-translate="bachelorThesis">Mémoire : "L’Analyse et conception d’un système informatique d’optimisation de trafic routier par la méthode ASCIMI."</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="section">
+        <h2 data-translate="innovativeProjects">Projets Innovants</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3 data-translate="agroSmartCongo">
+              <a href="https://www.agrosmartcongo.com" target="_blank">AgroSmart Congo</a>
+            </h3>
+            <p data-translate="agroSmartDesc">Application mobile utilisant l'IA et l'IoT pour optimiser l'irrigation et la gestion des cultures dans les zones arides.</p>
+          </div>
+          
+          <div class="project-card">
+            <h3 data-translate="cifTl">
+              <a href="https://www.ciftl.org" target="_blank">CIFTL</a>
+            </h3>
+            <p data-translate="cifTlDesc">Plateforme d'apprentissage en ligne adaptative offrant des cours personnalisés en fonction des styles d'apprentissage et de la connectivité.</p>
+          </div>
+          <div class="project-card">
+            <h3 data-translate="trustMySecurity">
+              <a href="https://www.trustmysecurity.com" target="_blank">TrustMySecurity</a>
+            </h3>
+            <p data-translate="trustMySecurityDesc">Système de suivi des officiers en temps réel utilisant Geofencing, Geotargeting et Geomonitoring.</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="section">
+        <h2 data-translate="engagements">Engagements & Réalisations</h2>
+        <ul>
+          <li data-translate="initiativeFounder">Cofondateur de "5BSS et Etech-plus", initiative formant 200+ jeunes aux technologies émergentes.</li>
+          <li data-translate="conferenceSpeaker">Conférencier à l'Unipal et PLU : "L'Innovation Frugale basée sur l'Intelligence Artificielle : Catalyseur du Développement Africain" (2024)</li>
+          <li data-translate="certifications">Certifications : "Python pour la Data Science (2020)", "Scrum: The Basics (2023)"</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  
+  <div style="text-align: center; margin-top: 20px;">
+    <button id="langFr" class="lang-btn">Français</button>
+    <button id="langEn" class="lang-btn">English</button>
+    <a href="#" class="download-btn" id="downloadPDF" data-translate="downloadBtn">Télécharger le CV en PDF</a>
+  </div>
+  
+  <div id="cropModal" class="modal">
+    <div class="modal-content">
+      <img id="image-to-crop" src="" alt="Image à rogner">
+      <button id="save-crop">Sauvegarder</button>
+      <button id="cancel-crop">Annuler</button>
+    </div>
+  </div>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const profileImg = document.getElementById('profile-img');
+    const btnPopup = document.getElementById('btn-popup');
+    const cropBtn = document.getElementById('crop-btn');
+    const modal = document.getElementById('cropModal');
+    const imageToCrop = document.getElementById('image-to-crop');
+    const saveCropBtn = document.getElementById('save-crop');
+    const cancelCropBtn = document.getElementById('cancel-crop');
+    const uploadBtn = document.getElementById('upload-btn');
+    const uploadInput = document.getElementById('upload-img');
+    let cropper;
+  
+    profileImg.addEventListener('click', (event) => {
+      event.stopPropagation();
+      btnPopup.style.display = btnPopup.style.display === 'block' ? 'none' : 'block';
+    });
+  
+    cropBtn.addEventListener('click', () => {
+      modal.style.display = 'block';
+      imageToCrop.src = profileImg.src;
+      cropper = new Cropper(imageToCrop, {
+        aspectRatio: 1,
+        viewMode: 1,
+      });
+      btnPopup.style.display = 'none';
+    });
+  
+    uploadBtn.addEventListener('click', () => {
+      uploadInput.click();
+      btnPopup.style.display = 'none';
+    });
+  
+    uploadInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profileImg.src = e.target.result;
+          imageToCrop.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  
+    saveCropBtn.addEventListener('click', () => {
+      const croppedCanvas = cropper.getCroppedCanvas();
+      profileImg.src = croppedCanvas.toDataURL('image/jpeg');
+      modal.style.display = 'none';
+      cropper.destroy();
+    });
+  
+    cancelCropBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      cropper.destroy();
+    });
+  
+    document.addEventListener('click', (event) => {
+      if (!profileImg.contains(event.target) && !btnPopup.contains(event.target)) {
+        btnPopup.style.display = 'none';
+      }
+    });
+  });
+  </script>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const downloadPDF = document.getElementById('downloadPDF');
+    
+    downloadPDF.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Hide elements we don't want in the PDF
+      const elementsToHide = document.querySelectorAll('.lang-btn, .download-btn');
+      elementsToHide.forEach(el => el.style.display = 'none');
+      
+      const element = document.getElementById('cv-content');
+      const lang = document.title.includes("Interactive") ? "en" : "fr";
+      const opt = {
+        margin: [5, 5, 5, 5],
+        filename: `CV_KABASELE_KANKONDE_ACHILLE_${lang}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2, 
+          useCORS: true,
+          scrollY: 0,
+          windowWidth: document.documentElement.offsetWidth
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+  
+      html2pdf().set(opt).from(element).save().then(() => {
+        // Show the elements again after PDF generation
+        elementsToHide.forEach(el => el.style.display = '');
+      });
+    });
+  });
+  </script>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const translations = {
+      fr: {
+        title: "CV Interactif et Téléchargeable - KABASELE KANKONDE ACHILLE",
+        downloadBtn: "Télécharger le CV en PDF",
+        profileTitle: "Innovateur Technologique & Aspirant Assistant d'Enseignement en Informatique",
+        contact: "Contact",
+        skills: "Compétences",
+        languages: "Langues",
+        professionalProfile: "Profil Professionnel",
+        professionalProfileContent: "Passionné par l'intersection de la technologie, de l'éducation et du développement durable, je cherche à repousser les limites de l'innovation pour résoudre des problèmes complexes en Afrique. Mon approche combine une expertise technique approfondie avec une vision stratégique, visant à former la prochaine génération de leaders technologiques tout en contribuant au progrès socio-économique.",
+        workExperience: "Expérience Professionnelle",
+        education: "Formation Académique",
+        innovativeProjects: "Projets Innovants",
+        engagements: "Engagements & Réalisations",
+        webDevelopment: "Développement Web",
+        mobileDevelopment: "Développement Mobile IOS et Android",
+        ai: "Intelligence Artificielle",
+        projectManagement: "Gestion de Projets",
+        french: "Français",
+        english: "Anglais",
+        swahili: "Swahili",
+        universityAssistant: "Assistant Universitaire et Chef de Projet",
+        universityAssistantPlace: "Philip Lemon University & Université Panafricaine de Lubumbashi | 2020 - Présent",
+        universityAssistantDesc1: "Enseignement des cours en IA, machine learning, systèmes embarqués, modélisation UML/SysML, et méthodologies multi-agents (MASE), formant des étudiants aux technologies émergentes et à l'ingénierie logicielle.",
+        universityAssistantDesc2: "Chef de projet pour un système de surveillance d'examens par drones, utilisant l'IA et la vision par ordinateur pour surveiller les auditoires et détecter les comportements suspects en temps réel.",
+        universityAssistantDesc3: "Développement d'une solution de gestion de présence des étudiants par reconnaissance faciale, automatisant le suivi des présences.",
+        universityAssistantDesc4: "Encadrement de projets web et mobiles, guidant les étudiants dans la création d'applications pratiques comme des systèmes de gestion académique et de surveillance en temps réel.",
+        trustMyTaskDev: "Développeur de la Plateforme TrustMyTask",
+        trustMyTaskPlace: "Projet Personnel | 2022 - Présent",
+        trustMyTaskDesc1: "Création d'une plateforme de gestion de projets basée sur Scrum, avec 200+ utilisateurs gérant efficacement leurs tâches.",
+        trustMyTaskDesc2: "Optimisation des processus de développement logiciel au sein d'une équipe collaborative.",
+        projectManagerCeridac: "Gestionnaire de Projet, Ceridac Éditions",
+        ceridacPlace: "Ceridac Éditions, Kinshasa | 2023 - Présent",
+        ceridacDesc1: "Gestion de la plateforme de publication pour auteurs, avec plus de 50 contributeurs (professeurs et assistants).",
+        ceridacDesc2: "Publication et gestion de 300+ articles et livres, renforçant la visibilité des chercheurs congolais.",
+        trustMySecurityDev: "Développeur de la Plateforme TrustMySecurity",
+        trustMySecurityPlace: "Projet Personnel | 2022 - Présent",
+        trustMySecurityDesc1: "Développement d'une plateforme de suivi en temps réel pour la gestion des officiers de sécurité, vérifiant leur position et activité.",
+        trustMySecurityDesc2: "Gestion des rapports de présence et des activités sur site, garantissant la transparence et la réactivité.",
+        drcProjectDev: "Développeur de la Plateforme DRCProject",
+        drcProjectPlace: "Projet Personnel | 2023 - Présent",
+        drcProjectDesc1: "Création d'une plateforme de gestion et de republication d'articles congolais en français et en anglais, facilitant l'accès à la recherche congolaise à l'international.",
+        drcProjectDesc2: "Utilisée principalement par la diaspora congolaise aux États-Unis.",
+        unipalDev: "Développeur de la Plateforme Unipal-Univ",
+        unipalPlace: "Université Panafricaine de Lubumbashi | 2021 - Présent",
+        unipalDesc1: "Développement d'une plateforme académique pour la gestion des inscriptions, des paiements et des processus internes.",
+        unipalDesc2: "Amélioration de l'efficacité administrative, facilitant l'inscription de 500+ étudiants par an.",
+        pluDev: "Développeur de la Plateforme PLU",
+        pluPlace: "Philip Lemon University | 2020 - 2023",
+        pluDesc1: "Développement et gestion d'une plateforme académique pour la gestion des inscriptions et des paiements académiques.",
+        pluDesc2: "Automatisation des processus, améliorant la transparence financière pour 700+ étudiants.",
+        masterInInformatique: "Master en Informatique, spécialisation Génie logiciel (en cours)",
+        esisalamaPlace: "Esisalama | 2022 - Présent",
+        researchTopic: "Recherche : \"Algorithmes de Deep Learning pour la Détection Précoce des Maladies Tropicales\"",
+        bachelorInGIS: "Licence en Génie des Systèmes d'Information",
+        upiPlace: "Université Protestante de Lubumbashi | 2017 - 2019",
+        bachelorThesis: "Mémoire : \"Analyse et conception d'un système de gestion de la circulation par la méthode ASCIMI\"",
+        agroSmartCongo: "AgroSmart Congo",
+        agroSmartDesc: "Application mobile utilisant l'IA et l'IoT pour optimiser l'irrigation et la gestion des cultures dans les zones arides.",
+        cifTl: "CIFTL",
+        cifTlDesc: "Plateforme d'apprentissage en ligne adaptative offrant des cours personnalisés en fonction des styles d'apprentissage et de la connectivité.",
+        trustMySecurity: "TrustMySecurity",
+        trustMySecurityDesc: "Système de suivi des officiers en temps réel utilisant Geofencing, Geotargeting et Geomonitoring.",
+        initiativeFounder: "Cofondateur de \"5BSS et Etech-plus\", initiative formant 200+ jeunes aux technologies émergentes.",
+        conferenceSpeaker: "Conférencier à l'Unipal et PLU : \"L'Innovation Frugale basée sur l'Intelligence Artificielle : Catalyseur du Développement Africain\" (2024)",
+        certifications: "Certifications : \"Python pour la Data Science (2020)\", \"Scrum: The Basics (2023)\"",
+      },
+      en: {
+        title: "Interactive and Downloadable CV - KABASELE KANKONDE ACHILLE",
+        downloadBtn: "Download CV as PDF",
+        profileTitle: "Technology Innovator & Aspiring Computer Science Teaching Assistant",
+        contact: "Contact",
+        skills: "Skills",
+        languages: "Languages",
+        professionalProfile: "Professional Profile",
+        professionalProfileContent: "Passionate about the intersection of technology, education, and sustainable development, I seek to push the boundaries of innovation to solve complex problems in Africa. My approach combines deep technical expertise with a strategic vision, aiming to train the next generation of technology leaders while contributing to socio-economic progress.",
+        workExperience: "Work Experience",
+        education: "Academic Background",
+        innovativeProjects: "Innovative Projects",
+        engagements: "Engagements & Achievements",
+        webDevelopment: "Web Development",
+        mobileDevelopment: "iOS and Android Mobile Development",
+        ai: "Artificial Intelligence",
+        projectManagement: "Project Management",
+        french: "French",
+        english: "English",
+        swahili: "Swahili",
+        universityAssistant: "University Assistant and Project Manager",
+        universityAssistantPlace: "Philip Lemon University & Pan-African University of Lubumbashi | 2020 - Present",
+        universityAssistantDesc1: "Teaching courses in AI, machine learning, embedded systems, UML/SysML modeling, and multi-agent methodologies (MASE), training students in emerging technologies and software engineering.",
+        universityAssistantDesc2: "Project manager for a drone-based exam surveillance system, using AI and computer vision to monitor auditoriums and detect suspicious behavior in real-time.",
+        universityAssistantDesc3: "Development of a student attendance management solution using facial recognition, automating attendance tracking.",
+        universityAssistantDesc4: "Supervision of web and mobile projects, guiding students in creating practical applications such as academic management and real-time monitoring systems.",
+        trustMyTaskDev: "TrustMyTask Platform Developer",
+        trustMyTaskPlace: "Personal Project | 2022 - Present",
+        trustMyTaskDesc1: "Creation of a Scrum-based project management platform, with 200+ users efficiently managing their tasks.",
+        trustMyTaskDesc2: "Optimization of software development processes within a collaborative team.",
+        projectManagerCeridac: "Project Manager, Ceridac Éditions",
+        ceridacPlace: "Ceridac Éditions, Kinshasa | 2023 - Present",
+        ceridacDesc1: "Management of the publishing platform for authors, with over 50 contributors (professors and assistants).",
+        ceridacDesc2: "Publication and management of 300+ articles and books, enhancing the visibility of Congolese researchers.",
+        trustMySecurityDev: "TrustMySecurity Platform Developer",
+        trustMySecurityPlace: "Personal Project | 2022 - Present",
+        trustMySecurityDesc1: "Development of a real-time tracking platform for managing security officers, verifying their position and activity.",
+        trustMySecurityDesc2: "Management of attendance reports and on-site activities, ensuring transparency and responsiveness.",
+        drcProjectDev: "DRCProject Platform Developer",
+        drcProjectPlace: "Personal Project | 2023 - Present",
+        drcProjectDesc1: "Creation of a platform for managing and republishing Congolese articles in French and English, facilitating access to Congolese research internationally.",
+        drcProjectDesc2: "Mainly used by the Congolese diaspora in the United States.",
+        unipalDev: "Unipal-Univ Platform Developer",
+        unipalPlace: "Pan-African University of Lubumbashi | 2021 - Present",
+        unipalDesc1: "Development of an academic platform for managing registrations, payments, and internal processes.",
+        unipalDesc2: "Improvement of administrative efficiency, facilitating the enrollment of 500+ students per year.",
+        pluDev: "PLU Platform Developer",
+        pluPlace: "Philip Lemon University | 2020 - 2023",
+        pluDesc1: "Development and management of an academic platform for managing registrations and academic payments.",
+        pluDesc2: "Automation of processes, improving financial transparency for 700+ students.",
+        masterInInformatique: "Master's in Computer Science, specializing in Software Engineering (in progress)",
+        esisalamaPlace: "Esisalama | 2022 - Present",
+        researchTopic: "Research: \"Deep Learning Algorithms for Early Detection of Tropical Diseases\"",
+        bachelorInGIS: "Bachelor's in Information Systems Engineering",
+        upiPlace: "Protestant University of Lubumbashi | 2017 - 2019",
+        bachelorThesis: "Thesis: \"Analysis and Design of a Traffic Management System by ASCIMI Method\"",
+        agroSmartCongo: "AgroSmart Congo",
+        agroSmartDesc: "Mobile application using AI and IoT to optimize irrigation and crop management in arid areas.",
+        cifTl: "CIFTL",
+        cifTlDesc: "Adaptive online learning platform offering personalized courses based on learning styles and connectivity.",
+        trustMySecurity: "TrustMySecurity",
+        trustMySecurityDesc: "Real-time officer tracking system using Geofencing, Geotargeting, and Geomonitoring.",
+        initiativeFounder: "Co-founder of \"5BSS and Etech-plus\", initiative training 200+ youth in emerging technologies.",
+        conferenceSpeaker: "Speaker at Unipal and PLU: \"Frugal Innovation based on Artificial Intelligence: Catalyst for African Development\" (2024)",
+        certifications: "Certifications: \"Python for Data Science (2020)\", \"Scrum: The Basics (2023)\"",
+      }
+    };
+  
+    const switchLanguage = (lang) => {
+      document.title = translations[lang].title;
+      
+      document.getElementById('downloadPDF').textContent = translations[lang].downloadBtn;
+  
+      document.querySelector('.main-content header p').textContent = translations[lang].profileTitle;
+  
+      const headings = document.querySelectorAll('.main-content h2');
+      headings.forEach((heading, index) => {
+        switch(index) {
+          case 0: heading.textContent = translations[lang].professionalProfile; break;
+          case 1: heading.textContent = translations[lang].workExperience; break;
+          case 2: heading.textContent = translations[lang].education; break;
+          case 3: heading.textContent = translations[lang].innovativeProjects; break;
+          case 4: heading.textContent = translations[lang].engagements; break;
+        }
+      });
+  
+      document.querySelector('.main-content .section:nth-of-type(1) p').textContent = translations[lang].professionalProfileContent;
+  
+      const sidebarHeadings = document.querySelectorAll('.sidebar h2');
+      sidebarHeadings[0].textContent = translations[lang].contact;
+      sidebarHeadings[1].textContent = translations[lang].skills;
+      sidebarHeadings[2].textContent = translations[lang].languages;
+  
+      const skills = document.querySelectorAll('.skill p');
+      skills[0].textContent = translations[lang].webDevelopment;
+      skills[1].textContent = translations[lang].mobileDevelopment;
+      skills[2].textContent = translations[lang].ai;
+      skills[3].textContent = translations[lang].projectManagement;
+  
+      const languages = document.querySelectorAll('.language p');
+      languages[0].textContent = translations[lang].french;
+      languages[1].textContent = translations[lang].english;
+      languages[2].textContent = translations[lang].swahili;
+  
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+    };
+  
+    document.getElementById('langFr').addEventListener('click', () => switchLanguage('fr'));
+    document.getElementById('langEn').addEventListener('click', () => switchLanguage('en'));
+  });
+  </script>
+  
+  </body>
+  </html>
